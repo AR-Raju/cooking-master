@@ -1,0 +1,14 @@
+.my-input-size {
+  width: 40%;
+}
+#mealsDiv {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+}
+.meal-div {
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  width: 300px;
+}
