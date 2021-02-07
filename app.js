@@ -1,15 +1,4 @@
-// function searchMeals() {
-//   fetch("https://www.themealdb.com/api/json/v1/1/search.php?s=Arrabiata")
-//     .then((res) => res.json())
-//     .then((data) => {
-//       //   const meal = data.meals[0];
-//       //   const mealName = meal.strMeal;
-//       //   document.getElementById("mealName").innerText = mealName;
-//       console.log(data);
-//     });
-// }
-// searchMeals();
-
+// searching food
 document.getElementById("searchBtn").addEventListener("click", function () {
   const input = document.getElementById("searchField").value;
   let url = "";
@@ -24,33 +13,39 @@ document.getElementById("searchBtn").addEventListener("click", function () {
     .then((data) => displayMeals(data));
 });
 
-function displayMeals(mealsName) {
+displayMeals = (mealsName) => {
   const mealsDiv = document.getElementById("mealsDiv");
 
   let arr = mealsName.meals;
-  arr.forEach((meal) => {
-    const mealDiv = document.createElement("div");
-    mealDiv.className = "meal-div";
+  // handle exception input
+  if (arr == null) {
+    const handleException = document.getElementById("handle-exception");
+    handleException.innerHTML = `<h1 class="text-white"> Please enter a valid food name!!! </h1>`;
+  } else {
+    arr.forEach((meal) => {
+      const mealDiv = document.createElement("div");
+      mealDiv.className = "meal-div";
 
-    const mealInfo = `<div class="card" style="width: 18rem;">
+      const mealInfo = `<div class="card" style="width: 18rem;">
   <img class="card-img-top" src="${meal.strMealThumb}/preview" alt="Card image cap">
   <div class="card-body">
     <h5>${meal.strMeal}</h5>
     <button onclick = "displayMealDetails('${meal.strMeal}')">Details</button>
   </div>
 </div>`;
-    mealDiv.innerHTML = mealInfo;
-    mealsDiv.appendChild(mealDiv);
-  });
-}
+      mealDiv.innerHTML = mealInfo;
+      mealsDiv.appendChild(mealDiv);
+    });
+  }
+};
 
 //display meal details
-function displayMealDetails(mealName) {
+displayMealDetails = (mealName) => {
   const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${mealName}`;
   fetch(url)
     .then((res) => res.json())
     .then((data) => renderMealInfo(data));
-}
+};
 
 function renderMealInfo(meal) {
   const mealDetailsDiv = document.getElementById("mealDetails");
