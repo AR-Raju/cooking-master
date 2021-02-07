@@ -18,7 +18,7 @@ displayMeals = (mealsName) => {
 
   let arr = mealsName.meals;
   // handle exception input
-  if (arr == null) {
+  if (arr == null || arr.length == 0) {
     const handleException = document.getElementById("handle-exception");
     handleException.innerHTML = `<h1 class="text-white"> Please enter a valid food name!!! </h1>`;
   } else {
